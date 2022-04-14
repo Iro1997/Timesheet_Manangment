@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <table class ="table table-striped">
+        <thead class ="thead-light">
+            <tr>
+                <td>ID</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+            </tr>
+        </thead>
+        % for x in key %
+         <tr>
+             <td>{{x.user.id}}</td>
+             <td>{{x.user.first_name}}</td>
+             <td>{{x.user.last_name}}</td>
+         </tr>
+    </table>
+{% endblock %}

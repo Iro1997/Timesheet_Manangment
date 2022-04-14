@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from user_managment.views import home
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('timesheet.urls'))
+    path('doctors/',include('user_managment.urls'))
 ]

@@ -1,11 +1,11 @@
 {% extends 'userspanel/navbar.html' %}
 
 {% block content %}
-    <h2>Login Form</h2>
+    <h2>Register Form</h2>
     <form method="post">
         {% csrf_token%}
 
-        {% for item in login_form %}
+        {% for item in registration_form %}
             {{item.label_tag}}
             {{item}}
 
@@ -17,14 +17,8 @@
                 <p style="color:red;">{{error}}</p>
             {% endfor%}
 
-            {% if login_form.non_field_erros %}
-                <div style="color:red";>
-                    <p>{{login_form.non_field_errors}}</p>
-                </div>
-            {% endif %}
-
 
         {%endfor%}
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
     </form>
 {% endblock content %}

@@ -1,13 +1,13 @@
 {% extends 'userspanel/navbar.html' %}
 
 {% block content %}
-    <h2>Login Form</h2>
+    <h2>Update Form</h2>
     <form method="post">
         {% csrf_token %}
 
-        {% for item in login_form %}
+        {% for item in update_form %}
             {{item.label_tag}}
-            {{item}}
+            {{item}}<br>
 
             {% if item.help_text %}
                 <small style="color:green;">{{item.help_text}}</small>
@@ -15,19 +15,19 @@
 
         {%endfor%}
 
-        {% for item in login_form %}
+        {% for item in update_form %}
             {% for error in item.errors %}
                 <p style="color:red;">{{error}}</p>
             {% endfor %}
         {% endfor %}
 
-        {% if login_form.non_field_errors %}
+        {% if update_form.non_field_errors %}
                 <div style="color:red;">
-                    <p>{{login_form.non_field_errors}}</p>
+                    <p>{{update_form.non_field_errors}}</p>
                 </div>
 
         {% endif %}
         
-        <button type="submit">Login</button>
+        <button type="submit">Save changes</button>
     </form>
 {% endblock content %}

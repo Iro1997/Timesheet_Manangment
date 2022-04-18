@@ -3,7 +3,7 @@ from msilib.schema import ListView
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth import login,authenticate, logout
-from user_managment.forms import DoctorAuthenticationForm, RegistrationForm
+from user_managment.forms import DoctorAuthenticationForm, DoctorUpdateForm, RegistrationForm
 from user_managment.models import Doctor
 
 
@@ -14,8 +14,8 @@ def registration_view(request):
     if request.POST:
         form=RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username=form.cleaned_data.get('email')
+            account=form.save()
+            username=form.cleaned_data.get('username')
             raw_password=form.cleaned_data.get('password1')
             account=authenticate(username=username,password=raw_password)
             login(request,account)
@@ -52,7 +52,28 @@ def login_view(request):
     else:
         form=DoctorAuthenticationForm()
     context['login_form']=form
-    return render(request, 'userspanel/login.html',context)           
+    return render(request, 'userspanel/login.html',context) 
+
+
+def update_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    context = {}
+
+    if request.POST:
+        form=DoctorUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+    else:
+        form=DoctorUpdateForm(
+            initial={
+                'username': request.user.username,
+                'password':request.user.password
+            }
+        )
+    context['update_form']= form
+    return render(request,'userspanel/doctorupdate.html',context)
+
         
 
 

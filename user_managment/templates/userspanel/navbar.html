@@ -3,7 +3,10 @@
 {% block content %}
     <h1>This is the List of Doctors </h1>
     {% for item in model %}
-       <p>{{item}}</p> 
+    <ul>
+        <li> Dr. {{item}}</li>
+    </ul>
+       
 
     {% endfor %}
 
